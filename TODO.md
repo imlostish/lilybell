@@ -1,0 +1,9 @@
+- [ ] Add lilybell gallery to background
+- [ ] Finish Hero Section
+- [ ] Finish About Section
+- [ ] Finish Contact Section
+- [ ] Add good shadows to the content
+- [ ] Add animations
+  - [ ] Scroll Slides (50/50)
+- [ ] Resend - email flow
+- [ ] Lilybell style components
