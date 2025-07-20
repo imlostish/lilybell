@@ -1,6 +1,7 @@
 "use client";
 
-import { ContactSchema } from "@/schemas";
+import { contactMe } from "@/actions/contact-me";
+import { ContactSchema, type ContactSchemaType } from "@/schemas";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import type { z } from "zod";
@@ -37,10 +38,20 @@ const ContactForm = () => {
 		},
 	});
 
-	function onSubmit(values: z.infer<typeof ContactSchema>) {
+	async function onSubmit(values: ContactSchemaType) {
 		// Do something with the form values.
 		// ✅ This will be type-safe and validated.
-		console.log(values);
+		console.log("Form submitted with values:", values);
+
+		const { success, data, error } = await ContactSchema.safeParseAsync(values);
+		console.log({ success, data, error });
+
+		if (!success) {
+			console.error("Validation failed:", error);
+			return;
+		}
+
+		await contactMe(data);
 	}
 
 	const reasons = ["professional contact", "message", "suggestion"];
